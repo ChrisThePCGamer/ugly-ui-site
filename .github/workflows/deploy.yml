@@ -3,6 +3,7 @@ name: Build and Deploy Site
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: # optional, allows manual trigger
 
 jobs:
   lint-and-deploy:
@@ -11,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # ensures full history, needed for gh-pages push
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -28,4 +31,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./  # adjust if your site is in a subfolder
+          user_name: github-actions
+          user_email: github-actions@github.com
