@@ -30,7 +30,7 @@ jobs:
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ssh_private_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./           # folder containing your static site
           publish_branch: gh-pages  # deploys to gh-pages branch
           user_name: github-actions
